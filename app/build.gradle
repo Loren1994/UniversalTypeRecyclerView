@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.0'
+    defaultConfig {
+        applicationId "loren.pers.universalrecyclerview"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.2.50'
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha3'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0-alpha3'
+}
+
+androidExtensions {
+    experimental = true
+}

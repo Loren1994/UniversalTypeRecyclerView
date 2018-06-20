@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="ADD" />
+
+    <Button
+        android:id="@+id/new_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="new" />
+
+    <loren.pers.universalrecyclerview.universal.UniversalRecyclerView
+        android:id="@+id/universal_rv"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <loren.pers.universalrecyclerview.universal.AutoRecyclerView
+        android:id="@+id/universal_arv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
