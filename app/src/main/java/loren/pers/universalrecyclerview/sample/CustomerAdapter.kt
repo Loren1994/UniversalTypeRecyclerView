@@ -17,6 +17,7 @@ class CustomerAdapter(context: Context, data: MutableList<ParentListItem>) : Uni
 
     override fun onBindItemView(holder: ViewHolder, parentIndex: Int, childIndex: Int) {
         holder.itemView.setOnClickListener { Toast.makeText(context, "$parentIndex - $childIndex", Toast.LENGTH_LONG).show() }
+        // TODO
         if (holder.itemViewType == TITLE) {
             holder.title_tv.text = data[parentIndex].titleStr
         } else {
