@@ -11,20 +11,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="ADD" />
+        android:text="ADD"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/new_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="new" />
+        android:text="new"
+        android:visibility="gone" />
 
     <loren.pers.universalrecyclerview.sample.view.UniversalRecyclerView
         android:id="@+id/universal_rv"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
 
     <loren.pers.universalrecyclerview.sample.view.AutoRecyclerView
         android:id="@+id/universal_arv"
