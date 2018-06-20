@@ -1,4 +1,4 @@
-package loren.pers.universalrecyclerview
+package loren.pers.universalrecyclerview.sample
 
 import loren.pers.universalrecyclerview.universal.OnTypeList
 

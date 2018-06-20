@@ -1,4 +1,4 @@
-package loren.pers.universalrecyclerview.universal
+package loren.pers.universalrecyclerview.sample.view
 
 import android.content.Context
 import android.util.AttributeSet

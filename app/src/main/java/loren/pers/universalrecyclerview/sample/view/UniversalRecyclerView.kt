@@ -1,16 +1,16 @@
-package loren.pers.universalrecyclerview.universal
+package loren.pers.universalrecyclerview.sample.view
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import loren.pers.universalrecyclerview.universal.UniversalAdapter
 
 /**
  * Copyright © 2018/6/20 by loren
  */
 class UniversalRecyclerView(context: Context, attributeSet: AttributeSet) : RecyclerView(context, attributeSet) {
 
-    //TODO
     var SPAN_COUNT = 3
 
     init {

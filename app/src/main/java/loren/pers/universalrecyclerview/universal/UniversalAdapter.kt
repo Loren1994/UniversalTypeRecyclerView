@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
-import loren.pers.universalrecyclerview.ParentListItem
+import loren.pers.universalrecyclerview.sample.ParentListItem
 
 /**
  * Copyright © 2018/6/20 by loren

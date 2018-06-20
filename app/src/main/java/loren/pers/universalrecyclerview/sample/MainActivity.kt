@@ -1,4 +1,4 @@
-package loren.pers.universalrecyclerview
+package loren.pers.universalrecyclerview.sample
 
 import android.content.Context
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.universal_item_body.*
 import kotlinx.android.synthetic.main.universal_item_title.*
+import loren.pers.universalrecyclerview.R
 import loren.pers.universalrecyclerview.universal.UniversalAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 //        universal_rv.adapter = CustomerAdapter(this, data)
 
         mAdapter = CustomerAdapter(this, data)
-        val layoutManager = GridLayoutManager(this, 2)
+        val layoutManager = GridLayoutManager(this, 1)
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return if (mAdapter.isTitle(position)) layoutManager.spanCount else 1
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun addLastTitle() {
         val temp = mutableListOf<ChildListItem>()
-        repeat(2) {
+        repeat(1) {
             temp.add(ChildListItem("ADD"))
         }
         data.last().childList.addAll(temp)

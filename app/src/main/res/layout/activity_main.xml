@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".sample.MainActivity">
 
     <Button
         android:id="@+id/add_btn"
@@ -20,13 +20,13 @@
         android:layout_gravity="center_horizontal"
         android:text="new" />
 
-    <loren.pers.universalrecyclerview.universal.UniversalRecyclerView
+    <loren.pers.universalrecyclerview.sample.view.UniversalRecyclerView
         android:id="@+id/universal_rv"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <loren.pers.universalrecyclerview.universal.AutoRecyclerView
+    <loren.pers.universalrecyclerview.sample.view.AutoRecyclerView
         android:id="@+id/universal_arv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
