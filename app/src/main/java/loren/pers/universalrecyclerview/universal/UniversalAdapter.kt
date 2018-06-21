@@ -76,11 +76,13 @@ abstract class UniversalAdapter(val context: Context, var data: MutableList<Pare
         }
     }
 
+    //列表刷新
     fun refresh() {
         init()
         notifyDataSetChanged()
     }
 
+    //列表移除某一项
     fun removeIndex(parentIndex: Int, childIndex: Int) {
         data[parentIndex].getBody().removeAt(childIndex)
         refresh()

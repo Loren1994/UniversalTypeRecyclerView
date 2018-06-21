@@ -133,6 +133,17 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 mAdapter.refresh()
 ~~~~
 
+* 移除列表某一项
+
+~~~~kotlin
+fun removeIndex(parentIndex: Int, childIndex: Int) {
+       data[parentIndex].getBody().removeAt(childIndex)
+       refresh()
+}
+~~~~
+
+
+
 * 支持多列
 
 ~~~~kotlin
