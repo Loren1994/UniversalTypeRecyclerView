@@ -5,5 +5,5 @@ package loren.pers.universalrecyclerview.universal
  */
 interface OnTypeList<T> {
     fun getTitle(): String
-    fun getBody():MutableList<T>
+    fun getBody(): MutableList<T>
 }

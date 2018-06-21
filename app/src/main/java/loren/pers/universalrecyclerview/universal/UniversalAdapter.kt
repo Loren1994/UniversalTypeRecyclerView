@@ -25,10 +25,10 @@ abstract class UniversalAdapter(val context: Context, val data: MutableList<Pare
         data.forEachIndexed { index, item ->
             var pos = 0
             repeat(index) {
-                pos += data[it].childList.size
+                pos += data[it].getBody().size
             }
             pos += index
-            titleIndexMap[item.titleStr] = pos
+            titleIndexMap[item.getTitle()] = pos
         }
     }
 
@@ -52,22 +52,29 @@ abstract class UniversalAdapter(val context: Context, val data: MutableList<Pare
 
     abstract fun setBodyLayout(): Int
 
-    abstract fun onBindItemView(holder: ViewHolder, parentIndex: Int, childIndex: Int)
+    abstract fun onTitleBindItemView(holder: ViewHolder, parentIndex: Int)
 
-    override fun getItemCount() = data.sumBy { it.childList.size } + data.size
+    abstract fun onBodyBindItemView(holder: ViewHolder, parentIndex: Int, childIndex: Int)
+
+    override fun getItemCount() = data.sumBy { it.getBody().size } + data.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var parentIndex = 0
         var childIndex = position + 1
         for (item in data) {
-            if (childIndex > (item.childList.size + 1)) {
-                childIndex -= (item.childList.size + 1)
+            if (childIndex > (item.getBody().size + 1)) {
+                childIndex -= (item.getBody().size + 1)
                 parentIndex++
             } else {
                 break
             }
         }
-        onBindItemView(holder, parentIndex, childIndex - 2)
+        childIndex -= 2
+        if (childIndex == -1) {
+            onTitleBindItemView(holder, parentIndex)
+        } else {
+            onBodyBindItemView(holder, parentIndex, childIndex)
+        }
     }
 
     fun refresh() {
