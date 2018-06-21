@@ -29,14 +29,13 @@ class MainActivity : AppCompatActivity() {
         }
         data.add(ParentListItem(child1, "TITLE - 0"))
         data.add(ParentListItem(child2, "TITLE - 1"))
-        data.add(ParentListItem(child2, "TITLE - 2"))
-        data.add(ParentListItem(child1, "TITLE - 3"))
-//        data.add(ParentListItem(child3, "TITLE - 4"))
+        data.add(ParentListItem(child3, "TITLE - 2"))
 
 //        universal_rv.adapter = CustomerAdapter(this, data)
 
         mAdapter = CustomerAdapter(this, data)
-        val layoutManager = GridLayoutManager(this, 3)
+        mAdapter.onRemoveListener = { universal_arv.adapter!!.notifyDataSetChanged() }
+        val layoutManager = GridLayoutManager(this, 1)
         //横向
         //layoutManager.orientation = GridLayoutManager.HORIZONTAL
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             val parentListItem = ParentListItem(temp, "NEW - ${System.currentTimeMillis()}")
             data.add(parentListItem)
             mAdapter.refresh()
-            universal_arv.hasNextPage(true)
+            universal_arv.hasNextPage(data.size != 7)
         }
     }
 

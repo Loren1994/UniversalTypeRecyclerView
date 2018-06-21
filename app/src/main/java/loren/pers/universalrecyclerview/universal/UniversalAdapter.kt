@@ -11,7 +11,7 @@ import loren.pers.universalrecyclerview.sample.ParentListItem
 /**
  * Copyright © 2018/6/20 by loren
  */
-abstract class UniversalAdapter(val context: Context, val data: MutableList<ParentListItem>) : RecyclerView.Adapter<UniversalAdapter.ViewHolder>() {
+abstract class UniversalAdapter(val context: Context, var data: MutableList<ParentListItem>) : RecyclerView.Adapter<UniversalAdapter.ViewHolder>() {
 
     val TITLE = 0
     private val BODY = 1
@@ -22,6 +22,10 @@ abstract class UniversalAdapter(val context: Context, val data: MutableList<Pare
     }
 
     private fun init() {
+        titleIndexMap.clear()
+        val tempList = data.filter { it.getBody().size != 0 }.toMutableList()
+        data.clear()
+        data.addAll(tempList)
         data.forEachIndexed { index, item ->
             var pos = 0
             repeat(index) {
@@ -32,21 +36,16 @@ abstract class UniversalAdapter(val context: Context, val data: MutableList<Pare
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return if (viewType == TITLE) {
-            ViewHolder(LayoutInflater.from(context).inflate(setTitleLayout(), parent, false))
-        } else {
-            ViewHolder(LayoutInflater.from(context).inflate(setBodyLayout(), parent, false))
-        }
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+            if (viewType == TITLE) {
+                ViewHolder(LayoutInflater.from(context).inflate(setTitleLayout(), parent, false))
+            } else {
+                ViewHolder(LayoutInflater.from(context).inflate(setBodyLayout(), parent, false))
+            }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (isTitle(position)) TITLE else BODY
-    }
+    override fun getItemViewType(position: Int) = if (isTitle(position)) TITLE else BODY
 
-    fun isTitle(position: Int): Boolean {
-        return titleIndexMap.values.contains(position)
-    }
+    fun isTitle(position: Int) = titleIndexMap.values.contains(position)
 
     abstract fun setTitleLayout(): Int
 
@@ -80,6 +79,11 @@ abstract class UniversalAdapter(val context: Context, val data: MutableList<Pare
     fun refresh() {
         init()
         notifyDataSetChanged()
+    }
+
+    fun removeIndex(parentIndex: Int, childIndex: Int) {
+        data[parentIndex].getBody().removeAt(childIndex)
+        refresh()
     }
 
     class ViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer
