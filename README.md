@@ -66,6 +66,19 @@ interface OnTypeList<T> {
 }
 ~~~~
 
+* 数据类示例
+
+~~~~kotlin
+data class ParentListItem(val childList: MutableList<ChildListItem>,
+                          val titleStr: String = "") : OnTypeList<ChildListItem> {
+    override fun getBody() = childList
+
+    override fun getTitle() = titleStr
+}
+~~~~
+
+> 数据类需要实现OnTypeList接口，以便UniversalAdapter知道childList和title对应的字段。这里直接返回相应字段即可。
+
 * 在UniversalAdapter一初始化便要对标题position记录，这里用hashMap去记录标题的index
 
 ~~~~kotlin
@@ -79,13 +92,15 @@ private fun init() {
         data.forEachIndexed { index, item ->
             var pos = 0
             repeat(index) {
-                pos += data[it].childList.size
+                pos += data[it].getBody().size
             }
             pos += index
-            titleIndexMap[item.titleStr] = pos
+            titleIndexMap[item.getTitle()] = pos
         }
 }
 ~~~~
+
+> 通过数据类实现的接口去获取childList和title。利用两层循环把数组每一项的标题和对应的子项数量相加，得到每一个标题的position
 
 * 计算position的外层和内层index
 
@@ -94,14 +109,19 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var parentIndex = 0
         var childIndex = position + 1
         for (item in data) {
-            if (childIndex > (item.childList.size + 1)) {
-                childIndex -= (item.childList.size + 1)
+            if (childIndex > (item.getBody().size + 1)) {
+                childIndex -= (item.getBody().size + 1)
                 parentIndex++
             } else {
                 break
             }
         }
-        onBindItemView(holder, parentIndex, childIndex - 2)
+        childIndex -= 2
+        if (childIndex == -1) {
+            onTitleBindItemView(holder, parentIndex)
+        } else {
+            onBodyBindItemView(holder, parentIndex, childIndex)
+        }
 }
 ~~~~
 
@@ -113,3 +133,22 @@ override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 mAdapter.refresh()
 ~~~~
 
+* 支持多列
+
+~~~~kotlin
+//横向
+//layoutManager.orientation = GridLayoutManager.HORIZONTAL
+layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+      override fun getSpanSize(position: Int): Int {
+            return if (mAdapter.isTitle(position)) layoutManager.spanCount else 1
+      }
+ }
+~~~~
+
+> 标题需要占满，所以此代码是必需的。可根据需求自行在Activity中定制LayoutManager，也可直接使用sample中的UniversalRecyclerview。
+
+
+
+项目地址：https://github.com/Loren1994/UniversalTypeRecyclerView
+
+##### 如果对你有帮助，请给个star~ 欢迎issue~
